@@ -19,8 +19,12 @@ else
 }
 
 //as
-object str1 = "car";
+object str1 = 2;
 string tesla = str1 as string;
+if(str1 is string tesla2)
+{
+    Console.WriteLine("Tesla2");
+}
 Console.WriteLine(tesla);
 
 var mihai = new Person("Mihai", new Company("Amdaris"));
