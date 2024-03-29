@@ -1,6 +1,6 @@
 ﻿using CleanCode.Application.Constants;
 using CleanCode.Application.Validation;
-using CleanCode.Domain;
+using CleanCode.Domain.Models;
 
 namespace CleanCode.Infrastructure.Validation;
 
@@ -8,31 +8,33 @@ public class SpeakerValidator : ISpeakerValidator
 {
     public bool Validate(Speaker speaker)
     {
-        if (string.IsNullOrWhiteSpace(FirstName))
-            throw new ArgumentNullException(nameof(FirstName), "First Name is required.");
-        if (string.IsNullOrWhiteSpace(LastName))
-            throw new ArgumentNullException(nameof(LastName), "Last Name is required.");
-        if (string.IsNullOrWhiteSpace(Email))
-            throw new ArgumentNullException(nameof(Email), "Email is required.");
+        if (string.IsNullOrWhiteSpace(speaker.FirstName))
+            throw new ArgumentNullException(nameof(speaker.FirstName), "First Name is required.");
+        if (string.IsNullOrWhiteSpace(speaker.LastName))
+            throw new ArgumentNullException(nameof(speaker.LastName), "Last Name is required.");
+        if (string.IsNullOrWhiteSpace(speaker.Email))
+            throw new ArgumentNullException(nameof(speaker.Email), "Email is required.");
 
-        if (!IsQualifiedSpeaker())
+        if (!IsQualifiedSpeaker(speaker))
             throw new SpeakerDoesntMeetRequirementsException("Speaker doesn't meet our arbitrary and capricious standards.");
 
-        if (!Sessions.Any())
+        if (!speaker.Sessions.Any())
             throw new NoSessionsApprovedException("No sessions approved.");
+
+        return true;
     }
 
-    private bool IsQualifiedSpeaker()
+    private bool IsQualifiedSpeaker(Speaker speaker)
     {
         var prohibitedDomains = new List<string> { "aol.com", "hotmail.com", "prodigy.com", "CompuServe.com" };
 
-        var isQualified = Exp > 10 || HasBlog || Certifications?.Count > 3 || GoodEmployers.List.Contains(Employer);
+        var isQualified = speaker.Exp > 10 || speaker.HasBlog || speaker.Certifications?.Count > 3 || GoodEmployers.List.Contains(speaker.Employer);
 
         if (!isQualified)
         {
-            string emailDomain = Email.Split('@').Last();
+            string emailDomain = speaker.Email.Split('@').Last();
             isQualified = !prohibitedDomains.Contains(emailDomain) &&
-                          !(Browser.Name == WebBrowser.BrowserName.InternetExplorer.ToString() && Browser.MajorVersion < 9);
+                          !(speaker.Browser.Name == WebBrowser.BrowserName.InternetExplorer.ToString() && speaker.Browser.MajorVersion < 9);
         }
 
         return isQualified;

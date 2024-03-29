@@ -1,4 +1,4 @@
-﻿namespace CleanCode.Domain
+﻿namespace CleanCode.Domain.Models
 {
     public class Speaker
     {
@@ -14,30 +14,30 @@
         public int RegistrationFee { get; set; }
         public List<Session> Sessions { get; set; }
 
-        public int? Register(IRepository repository)
-        {
-            ValidateSpeaker();
-            RegistrationFee = CalculateRegistrationFee();
+        //public int? Register(IRepository repository)
+        //{
+        //    ValidateSpeaker();
+        //    RegistrationFee = CalculateRegistrationFee();
 
-            try
-            {
-                return repository.SaveSpeaker(this);
-            }
-            catch (Exception)
-            {
-                // Log exception
-                throw; // Rethrow the exception
-            }
-        }
+        //    try
+        //    {
+        //        return repository.SaveSpeaker(this);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // Log exception
+        //        throw; // Rethrow the exception
+        //    }
+        //}
 
-        private int CalculateRegistrationFee() => Exp switch
-        {
-            <= 1 => 500,
-            <= 3 => 250,
-            <= 5 => 100,
-            <= 9 => 50,
-            _ => 0
-        };
+        //public int CalculateRegistrationFee() => Exp switch
+        //{
+        //    <= 1 => 500,
+        //    <= 3 => 250,
+        //    <= 5 => 100,
+        //    <= 9 => 50,
+        //    _ => 0
+        //};
     }
 
     #region Custom Exceptions

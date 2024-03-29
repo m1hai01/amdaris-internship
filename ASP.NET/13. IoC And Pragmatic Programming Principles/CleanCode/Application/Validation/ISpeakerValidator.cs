@@ -1,4 +1,4 @@
-﻿using CleanCode.Domain;
+﻿using CleanCode.Domain.Models;
 
 namespace CleanCode.Application.Validation;
 

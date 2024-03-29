@@ -4,54 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CleanCode.Application.Validation;
-using CleanCode.Domain;
+using CleanCode.Domain.Models;
 using CleanCode.Infrastructure;
+using CleanCode.Infrastructure.Repository;
+using CleanCode.Infrastructure.Validation;
 
 namespace CleanCode
 {
-    // Define IRepository interface
-    public interface IRepository
-    {
-        int? SaveSpeaker(Speaker speaker);
-    }
-
-    // Define Session class
-    public class Session
-    {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        // You can add more properties as needed
-    }
-
-    // Define WebBrowser class
-    public class WebBrowser
-    {
-        public string Name { get; set; }
-        public int MajorVersion { get; set; }
-
-        // You can add more properties as needed
-        public enum BrowserName
-        {
-            InternetExplorer,
-            Chrome,
-            Firefox,
-            Safari,
-            Edge
-            // Add more browsers as needed
-        }
-    }
-
-    // Implement the IRepository interface
-    public class SpeakerRepository : IRepository
-    {
-        public int? SaveSpeaker(Speaker speaker)
-        {
-            // Implement saving logic here
-            Console.WriteLine("Speaker saved successfully.");
-            return 1; // For demonstration
-        }
-    }
-
     internal class Program
     {
         private static void Main(string[] args)
@@ -73,7 +32,7 @@ namespace CleanCode
             };
 
             // Instantiate the repository
-            IRepository repository = new SpeakerRepository();
+            var repository = new Register(new SpeakerRepository());
             ISpeakerValidator validator = new SpeakerValidator();
 
             // Register the speaker
@@ -81,8 +40,7 @@ namespace CleanCode
             {
                 validator.Validate(speaker);
 
-                repository.RegisterSpeaker(speaker);
-                int? registrationResult = speaker.Register(repository);
+                int? registrationResult = repository.RegisterSpeaker(speaker);
                 Console.WriteLine("Registration fee: $" + speaker.RegistrationFee);
             }
             catch (Exception ex)
