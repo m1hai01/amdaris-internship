@@ -1,4 +1,5 @@
 ﻿using CleanCode.Application.Repository;
+using CleanCode.Application.Validation;
 using CleanCode.Domain.Models;
 using CleanCode.Infrastructure.Validation;
 using CleanCode.Utilities;
@@ -14,20 +15,20 @@ namespace CleanCode.Infrastructure.Repository
     public class Register
     {
         private readonly IRepository _repository;
+        private readonly ISpeakerValidator _speakerValidator;
 
-        public Register(IRepository repository)
+        public Register(IRepository repository, ISpeakerValidator speakerValidator)
         {
-            _repository = repository;
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _speakerValidator = speakerValidator ?? throw new ArgumentNullException(nameof(speakerValidator));
         }
 
         public int? RegisterSpeaker(Speaker speaker)
         {
-            var validator = new SpeakerValidator();
-            if (!validator.Validate(speaker))
+            if (!_speakerValidator.Validate(speaker))
                 throw new SpeakerDoesntMeetRequirementsException("Speaker doesn't meet requirements.");
 
-            speaker.RegistrationFee = CleanCode.Utilities.RegistrationFeeCalculator.CalculateRegistrationFee(speaker.Exp); ;
-            //RegistrationFee = RegistrationFeeCalculator.CalculateRegistrationFee(Exp);
+            speaker.RegistrationFee = CleanCode.Utilities.RegistrationFeeCalculator.CalculateRegistrationFee(speaker.Exp);
 
             try
             {

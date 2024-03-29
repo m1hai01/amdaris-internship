@@ -32,13 +32,15 @@ namespace CleanCode
             };
 
             // Instantiate the repository
-            var repository = new Register(new SpeakerRepository());
+            //var repository = new Register(new SpeakerRepository());
             ISpeakerValidator validator = new SpeakerValidator();
+            // Instantiate the repository
+            var repository = new Register(new SpeakerRepository(), validator);
 
             // Register the speaker
             try
             {
-                validator.Validate(speaker);
+                //validator.Validate(speaker);
 
                 int? registrationResult = repository.RegisterSpeaker(speaker);
                 Console.WriteLine("Registration fee: $" + speaker.RegistrationFee);
