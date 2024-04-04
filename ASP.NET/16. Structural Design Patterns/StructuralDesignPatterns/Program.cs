@@ -6,7 +6,7 @@ internal class Program
     public static void Main(string[] args)
     {
         // Example usage
-        string text = "Hello World.";
+        string text = "Hello World ".";
 
         // Applying different formatting options
         ITextFormat bold = new BoldText();
