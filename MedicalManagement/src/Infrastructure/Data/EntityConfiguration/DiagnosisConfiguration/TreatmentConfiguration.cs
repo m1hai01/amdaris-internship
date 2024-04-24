@@ -17,6 +17,10 @@ namespace Infrastructure.Data.EntityConfiguration.DiagnosisConfiguration
                    .WithOne(d => d.Treatment)
                    .HasForeignKey<Treatment>(t => t.DiagnosisId)
                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+                .Property(entity => entity.DurationUnit)
+                .HasConversion<string>();
         }
     }
 }

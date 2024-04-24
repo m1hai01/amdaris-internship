@@ -3,18 +3,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infrastructure.Configuration
+namespace Infrastructure.Configuration;
+
+internal static class ConfigureDbContext
 {
-    public static class ConfigureDbContext
+    internal static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration)
     {
-        internal static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration)
+        var connectionString = configuration.GetConnectionString("MedicalContext");
+        services.AddDbContext<MedicalManagementDbContext>(optionBuilder =>
         {
-            var connectionString = configuration.GetConnectionString("MedicalContext");
-            services.AddDbContext<MedicalManagementDbContext>(optionBuilder =>
-            {
-                optionBuilder.UseSqlServer(connectionString);
-            });
-            return services;
-        }
+            optionBuilder.UseSqlServer(connectionString);
+        });
+        return services;
     }
 }

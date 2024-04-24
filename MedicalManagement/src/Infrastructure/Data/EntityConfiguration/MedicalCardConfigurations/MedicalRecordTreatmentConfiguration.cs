@@ -18,6 +18,9 @@ namespace Infrastructure.Data.EntityConfiguration.MedicalCardConfigurations
                    .WithOne(mr => mr.Treatment)
                    .HasForeignKey<MedicalRecordTreatment>(mrt => mrt.MedicalRecordId)
                    .OnDelete(DeleteBehavior.Cascade);
+            builder
+                .Property(entity => entity.DurationUnit)
+                .HasConversion<string>();
 
             builder.HasMany(mrt => mrt.Medications)
                    .WithOne(mrm => mrm.Tratment)

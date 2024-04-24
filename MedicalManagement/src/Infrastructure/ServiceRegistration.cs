@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Infrastructure.Configuration;
+﻿using Infrastructure.Configuration;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -11,10 +11,11 @@ namespace Infrastructure;
 
 public static class ServiceRegistration
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
-    {
-        return services.AddDbContext(configuration);
-    }
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration) =>
+        services
+        .AddDbContext(configuration)
+        .AddRepositories()
+        .AddUnitOfWork();
 
     public static IHost MigrateDbContext<TContext>(this IHost host, Action<TContext, IServiceProvider>? seeder = null)
     where TContext : DbContext

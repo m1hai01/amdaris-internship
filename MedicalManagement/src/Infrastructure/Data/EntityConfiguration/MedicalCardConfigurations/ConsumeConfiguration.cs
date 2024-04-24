@@ -18,6 +18,10 @@ namespace Infrastructure.Data.EntityConfiguration.MedicalCardConfiguration.Medic
                    .WithOne()
                    .HasForeignKey<Consume>(c => c.MedicalRecordMedicationId)
                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+                .Property(entity => entity.Status)
+                .HasConversion<string>();
         }
     }
 }
