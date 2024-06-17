@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Polly;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Infrastructure;
 
@@ -15,7 +17,9 @@ public static class ServiceRegistration
         services
         .AddDbContext(configuration)
         .AddRepositories()
-        .AddUnitOfWork();
+        .AddUnitOfWork()
+        //AddJWTAuthorization(configuration);
+        .AddMicrosoftAuthentication(configuration);
 
     public static IHost MigrateDbContext<TContext>(this IHost host, Action<TContext, IServiceProvider>? seeder = null)
     where TContext : DbContext

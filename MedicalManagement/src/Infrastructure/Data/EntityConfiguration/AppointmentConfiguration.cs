@@ -13,6 +13,7 @@ namespace Infrastructure.Data.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Appointment> builder)
         {
+            // builder.HasKey(app => new { app.PatientId, app.DoctorId });???
             // Define relationships
             builder.HasOne(a => a.Patient)
                    .WithMany(p => p.Appointments)

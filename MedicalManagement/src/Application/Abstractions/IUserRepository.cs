@@ -11,7 +11,7 @@ namespace Application.Abstractions
     {
         Task<User?> GetUserByIdAsync(Guid id);
 
-        Task<List<User>> GetAllUsersAsync();
+        IQueryable<User> GetAll();
 
         Task CreateUserAsync(User user);
 

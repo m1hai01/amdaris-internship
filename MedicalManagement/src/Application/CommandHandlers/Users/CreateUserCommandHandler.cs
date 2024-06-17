@@ -22,12 +22,12 @@ namespace Application.CommandHandlers.Users
         public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             // Hash the password before storing it in the database
-            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            //var hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
             var user = new User
             {
                 Username = request.Username,
-                Password = hashedPassword,
+                Password = request.Password,
                 Email = request.Email,
                 Name = request.Name,
                 DateOfBirth = request.DateOfBirth,

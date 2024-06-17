@@ -7,5 +7,10 @@ namespace Infrastructure.Configuration;
 internal static class ConfigureRepositories
 {
     public static IServiceCollection AddRepositories(this IServiceCollection services)
-    => services.AddScoped<IUserRepository, UserRepository>();
+    {
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IDiagnosisRepository, DiagnosisRepository>();
+
+        return services;
+    }
 }

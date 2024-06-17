@@ -1,11 +1,13 @@
 ﻿using Domain.Models;
 using Domain.Models.Diagnosis;
 using Domain.Models.MedicalCard;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {
-    public class MedicalManagementDbContext : DbContext
+    public class MedicalManagementDbContext : IdentityDbContext<IdentityUser>
     {
         //-o Data/Migrations
         public MedicalManagementDbContext(DbContextOptions<MedicalManagementDbContext> options) : base(options)

@@ -9,16 +9,20 @@ namespace Infrastructure
 
         public UnitOfWork(
             MedicalManagementDbContext dbContext,
-            IUserRepository userRepository
+            IUserRepository userRepository,
+            IDiagnosisRepository diagnosisRepository
         // Add other repositories as needed
         )
         {
             _dbContext = dbContext;
             UserRepository = userRepository;
+            DiagnosisRepository = diagnosisRepository;
             // Initialize other repositories
         }
 
         public IUserRepository UserRepository { get; }
+        public IDiagnosisRepository DiagnosisRepository { get; }
+
         // Define other repository properties as needed
 
         public async Task<int> CommitAsync()

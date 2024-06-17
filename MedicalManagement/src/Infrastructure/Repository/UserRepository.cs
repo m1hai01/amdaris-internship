@@ -2,6 +2,7 @@
 using Domain.Models;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Polly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,9 @@ namespace Infrastructure.Repository
             return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public async Task<List<User>> GetAllUsersAsync()
+        public IQueryable<User> GetAll()
         {
-            return await _dbContext.Users.ToListAsync();
+            return _dbContext.Users.AsQueryable();
         }
 
         public async Task CreateUserAsync(User user)
