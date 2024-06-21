@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions;
 using Domain.Models.Diagnosis;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,10 @@ namespace Infrastructure.Repository
 
         public async Task<Diagnose> GetByIdAsync(Guid id)
         {
-            return await _context.Diagnoses.FindAsync(id);
+            return await _context
+                .Diagnoses
+                .Include(d => d.DiagnoseFiles)
+                .FirstOrDefaultAsync(d => d.Id == id);
         }
 
         public IQueryable<Diagnose> GetAll()

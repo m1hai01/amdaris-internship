@@ -1,17 +1,11 @@
 using Application;
-using Application.Abstractions;
 using Carter;
-using Domain.Models;
 using Infrastructure;
 using Infrastructure.Data;
-using Infrastructure.Configuration;
-
-using Microsoft.AspNetCore.Identity;
 using WebApi.Configuration;
-using Microsoft.AspNetCore.Authentication;
-using Swashbuckle.AspNetCore.SwaggerUI;
-using Microsoft.Identity.Web;
 using WebApi.Middlewares;
+using System.Text.Json.Serialization;
+using Domain.Shared;
 
 public class Program
 {
@@ -41,13 +35,17 @@ public class Program
         // Add the ConfigureSwaggerServices method here
         builder.Services.ConfigureSwaggerServices();
 
-        builder.Services.AddAuthorization();
+        //builder.Services.AddAuthorization();
 
         //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         //builder.Host.UseSerilog((context, configuration) =>
         //  configuration.ReadFrom.Configuration(context.Configuration));
         builder.Services.AddSingleton<GlobalExceptionHandlingMiddleware>();
+
+        builder.Services.Configure<AzureStorageSettings>(builder.Configuration.GetSection("AzureStorage"));
+
+        builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
         var app = builder.Build();
 
@@ -67,8 +65,8 @@ public class Program
             });
         }
 
-        app.UseAuthentication();
-        app.UseAuthorization();
+        //app.UseAuthentication();
+        //app.UseAuthorization();
 
         app.MapCarter();
 

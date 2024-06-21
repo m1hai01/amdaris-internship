@@ -9,7 +9,8 @@ namespace Domain.Models.Diagnosis
     public class Diagnose : BaseEntity
     {
         public string Name { get; set; } = null!;
-        public List<DiagnosisSymptom> Symptoms { get; set; } = new();
-        public Treatment Treatment { get; set; } = new();
+        public virtual List<DiagnosisSymptom?> Symptoms { get; set; } = new();
+        public virtual Treatment? Treatment { get; set; } = new();
+        public List<DiagnosisFile> DiagnoseFiles { get; set; } = new List<DiagnosisFile>();
     }
 }

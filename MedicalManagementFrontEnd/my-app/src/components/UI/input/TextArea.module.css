@@ -1,0 +1,28 @@
+.TextAreaGroup {
+    margin-bottom: 15px; 
+  }
+  
+  .Label {
+    display: block;
+    margin-bottom: 5px;
+    color: #007bff; 
+    font-weight: bold;
+  }
+  
+  .TextArea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #007bff; 
+    border-radius: 4px;
+    background-color: #f9f9f9; 
+    color: #333333; 
+    resize: vertical; 
+    margin-bottom: 20px; 
+  }
+  
+  .TextArea:focus {
+    border-color: #0056b3; 
+    outline: none; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+  }
+  

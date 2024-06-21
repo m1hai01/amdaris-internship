@@ -31,6 +31,7 @@ namespace Infrastructure.Data
         public DbSet<Medication> Medications { get; set; }
         public DbSet<DiagnosisSymptom> DiagnosisSymptoms { get; set; }
         public DbSet<Diagnose> Diagnoses { get; set; }
+        public DbSet<DiagnosisFile> DiagnosisFiles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace Application.Commands.Diagnosis
 {
-    public record CreateDiagnosisCommand(string Name) : IRequest<Guid>;
+    public record CreateDiagnosisCommand(string Name, Guid patientId) : IRequest<Guid>;
 }

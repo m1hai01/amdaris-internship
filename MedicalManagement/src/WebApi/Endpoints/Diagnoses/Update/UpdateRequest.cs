@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApi.Endpoints.Update
+namespace WebApi.Endpoints.Diagnoses.Update
 {
     public class UpdateRequest
     {

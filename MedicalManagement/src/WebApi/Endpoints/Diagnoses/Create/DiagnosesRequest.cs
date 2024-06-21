@@ -6,5 +6,7 @@ namespace WebApi.Endpoints.Diagnoses.Create
     {
         [Required]
         public string Name { get; set; } = string.Empty;
+
+        public Guid patientId { get; set; }
     }
 }

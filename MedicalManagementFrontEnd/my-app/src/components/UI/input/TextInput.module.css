@@ -1,0 +1,26 @@
+.InputGroup {
+    margin-bottom: 15px; /* Adjusted spacing for better separation */
+  }
+  
+  .Label {
+    display: block;
+    margin-bottom: 5px;
+    color: #007bff; /* Primary blue color for labels */
+    font-weight: bold;
+  }
+  
+  .Input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #007bff; 
+    border-radius: 4px;
+    background-color: #f9f9f9; 
+    color: #007bff;; 
+  }
+  
+  .Input:focus {
+    border-color: #aaccf0; 
+    outline: none; 
+    box-shadow: 0 0 5px rgba(127, 178, 233, 0.5); 
+  }
+  

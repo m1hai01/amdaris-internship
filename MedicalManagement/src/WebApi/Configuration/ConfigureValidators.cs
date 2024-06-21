@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using WebApi.Endpoints.Users.Create;
 
 namespace WebApi.Configuration
 {

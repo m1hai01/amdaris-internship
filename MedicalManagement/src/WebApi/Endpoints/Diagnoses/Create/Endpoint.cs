@@ -17,13 +17,13 @@ namespace WebApi.Endpoints.Diagnoses.Create
 
         private async Task<IResult> Handler([FromBody] DiagnosesRequest request, IMediator mediator, IValidator<DiagnosesRequest> validator, CancellationToken cancellationToken = default)
         {
-            //var validationResult = validator.Validate(request);
-            //if (!validationResult.IsValid)
-            //{
-            //    return Results.BadRequest(validationResult.Errors);
-            //}
+            var validationResult = validator.Validate(request);
+            if (!validationResult.IsValid)
+            {
+                return Results.BadRequest(validationResult.Errors);
+            }
 
-            var command = new CreateDiagnosisCommand(request.Name);
+            var command = new CreateDiagnosisCommand(request.Name, request.patientId);
             var diagnosisId = await mediator.Send(command, cancellationToken);
             return Results.Created($"/diagnoses/{diagnosisId}", diagnosisId);
         }

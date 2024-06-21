@@ -1,0 +1,53 @@
+.rootBox {
+  position: relative;
+  margin-top: 15px;
+  width: 100%;
+  min-height: 150px;
+  border-style: dashed;
+  border-color: #09a9d1; /* Replace with actual color value */
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.rootBox__isDragActive {
+  background-color: #32bddf; /* Replace with actual color value */
+  -webkit-animation: fadeInOut 0.2s linear forwards;
+  animation: fadeInOut 0.2s linear forwards;
+  border-color: #09a9d1; /* Replace with actual color value */
+}
+
+.dropzone-file {
+  border-style: solid;
+  border-color: #09a9d1; /* Replace with actual color value */
+  border-radius: 10px;
+  border-width: 2px;
+  margin-bottom: 5px;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

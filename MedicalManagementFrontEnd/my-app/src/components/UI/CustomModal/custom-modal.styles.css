@@ -1,0 +1,70 @@
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    min-height: 500px;
+    background-color: #ffffff;
+    box-shadow: #000000 0px 5px 15px;
+    padding: 32px;
+    border-radius: 10px;
+  }
+  .modal-button.modal-button{
+    margin-right: -10px;
+    width: 70px;
+    height: 35px;
+    margin-top:1px;
+    color: white;
+    font-size: 11px;
+    text-transform: capitalize;
+    background-color: #272424;
+    box-shadow: none;
+  &.dark {
+      &:hover {
+        background-color: #494747;
+      }
+    }
+  }
+  .attach-icon {
+    padding: 1px;
+    font-size: 30px !important;
+    border: 2px solid #9c9c9c;
+    border-radius: 20%;
+    color: #9c9c9c;
+  
+    &.dark {
+      border: 2px solid #ffffff;
+      color: #ffffff;
+    }
+  
+    &.green {
+      border: 2px solid #272424;
+      color: #272424;
+    }
+  
+    &.disabled {
+      border: 2px solid #9c9c9c;
+      color: #9c9c9c;
+    }
+  }
+  
+  .dropzone-submit-button.dropzone-submit-button {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .text-near-attach-icon {
+    margin-left: -5px;
+  }
+  
+  .highlighted-word.highlighted-word {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0a0707; 
+  }
+  
+  .custom-button:hover.custom-button:hover {
+    box-shadow: none; 
+    background-color: white;
+  }

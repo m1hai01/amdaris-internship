@@ -4,7 +4,7 @@ using Carter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApi.Endpoints.Update
+namespace WebApi.Endpoints.Diagnoses.Update
 {
     public class Endpoint : ICarterModule
     {

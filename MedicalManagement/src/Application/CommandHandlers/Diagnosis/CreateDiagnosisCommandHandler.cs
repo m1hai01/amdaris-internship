@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions;
 using Application.Commands.Diagnosis;
 using Domain.Models.Diagnosis;
+using Domain.Models.MedicalCard;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,20 @@ namespace Application.CommandHandlers.Diagnosis
 
         public async Task<Guid> Handle(CreateDiagnosisCommand request, CancellationToken cancellationToken)
         {
-            var diagnosis = new Diagnose { Id = Guid.NewGuid(), Name = request.Name };
+            var patient = await _unitOfWork.PatientRepository.GetByUserId(request.patientId);
+
+            var medicalCard = await _unitOfWork.MedicalCardRepository.FindByPatientId(patient.Id);
+            var myMedicalRecord = await _unitOfWork.MedicalRecordRepository.Find(medicalCard.Id);
+
+            var diagnosis = new Diagnose { Id = Guid.NewGuid(), Name = request.Name, Treatment = null };
+
+            var medicalRecordDiagnosis = new MedicalRecordDiagnosis { Diagnose = diagnosis };
+
+            myMedicalRecord.Diagnoses.Add(medicalRecordDiagnosis);
+
             await _unitOfWork.DiagnosisRepository.AddAsync(diagnosis);
+            await _unitOfWork.MedicalCardRepository.SaveChangesAsync();
+
             await _unitOfWork.CommitAsync();
             return diagnosis.Id;
         }
